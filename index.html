@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Permintaan Maaf 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Kucing animasi sebagai dekorasi */
+        .cat-decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
+            animation: floatCat 8s infinite ease-in-out;
+            font-size: 4em;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        @keyframes floatCat {
+            0%, 100% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-10px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-30px) translateX(5px) rotate(3deg);
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* Surat tertutup */
+        .letter-closed {
+            background: #fff8e1;
+            border: 2px solid #d4a574;
+            border-radius: 8px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+            cursor: pointer;
+        }
+
+        .letter-closed::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(212, 165, 116, 0.1), transparent);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .letter-title {
+            text-align: center;
+            color: #8b6f47;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .letter-title-line {
+            display: block;
+            margin: 5px 0;
+        }
+
+        /* Stempel */
+        .stamp {
+            position: relative;
+            margin: 40px auto;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #c62828 0%, #8e0000 100%);
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
+        }
+
+        .stamp::before {
+            content: '💌';
+            font-size: 3em;
+            animation: pulseStamp 2s infinite;
+        }
+
+        .stamp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(198, 40, 40, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+        }
+
+        .stamp:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulseStamp {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .stamp-text {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #8b6f47;
+            font-size: 0.9em;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+
+        /* Animasi surat terbuka */
+        .letter-closed.opening {
+            transform: perspective(1000px) rotateX(-90deg);
+            transform-origin: top center;
+        }
+
+        .letter-closed.opened {
+            display: none;
+        }
+
+        /* Surat terbuka */
+        .letter-opened {
+            background: #fff8e1;
+            border: 2px solid #d4a574;
+            border-radius: 8px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: none;
+            animation: letterAppear 0.8s ease-out;
+            margin-bottom: 20px;
+        }
+
+        .letter-opened.show {
+            display: block;
+        }
+
+        @keyframes letterAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #d4a574;
+        }
+
+        .letter-header h1 {
+            color: #8b6f47;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .letter-date {
+            color: #a0826d;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+
+        .letter-content {
+            line-height: 2;
+            color: #5d4037;
+            font-size: 1.1em;
+            text-align: justify;
+            margin-bottom: 30px;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+
+        .letter-signature {
+            text-align: right;
+            margin-top: 40px;
+            color: #8b6f47;
+            font-style: italic;
+        }
+
+        .letter-signature .name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Foto di bagian bawah surat */
+        .letter-photo {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #d4a574;
+        }
+
+        .letter-photo img {
+            max-width: 150px;
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 3px solid #d4a574;
+        }
+
+        /* Kucing dekoratif di dalam surat */
+        .cats-in-letter {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .cat-emoji {
+            font-size: 3em;
+            animation: bounceCat 2s infinite ease-in-out;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .cat-emoji:nth-child(1) { animation-delay: 0s; }
+        .cat-emoji:nth-child(2) { animation-delay: 0.3s; }
+        .cat-emoji:nth-child(3) { animation-delay: 0.6s; }
+        .cat-emoji:nth-child(4) { animation-delay: 0.9s; }
+
+        @keyframes bounceCat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(10deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 10px 0;
+            }
+
+            .letter-title {
+                font-size: 1.4em;
+            }
+
+            .stamp {
+                width: 80px;
+                height: 80px;
+            }
+
+            .stamp::before {
+                font-size: 2.5em;
+            }
+
+            .letter-content {
+                font-size: 1em;
+            }
+
+            .cat-decoration {
+                font-size: 3em;
+            }
+
+            .letter-opened {
+                padding: 30px 20px;
+            }
+
+            .letter-photo img {
+                max-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Kucing dekoratif di background -->
+    <div class="cat-decoration" style="top: 10%; left: 5%; animation-delay: 0s;">🐱</div>
+    <div class="cat-decoration" style="top: 20%; right: 8%; animation-delay: 2s;">😸</div>
+    <div class="cat-decoration" style="bottom: 15%; left: 10%; animation-delay: 4s;">😻</div>
+    <div class="cat-decoration" style="bottom: 25%; right: 5%; animation-delay: 6s;">🐾</div>
+    <div class="cat-decoration" style="top: 50%; left: 2%; animation-delay: 1s;">😺</div>
+    <div class="cat-decoration" style="top: 60%; right: 3%; animation-delay: 3s;">🙀</div>
+
+    <div class="container">
+        <!-- Surat Tertutup -->
+        <div class="letter-closed" id="letterClosed">
+            <div class="letter-title">
+                <span class="letter-title-line">Surat Permintaan</span>
+            </div>
+            <div class="stamp" id="stamp">
+                <div class="stamp-text">Klik untuk membuka</div>
+            </div>
+            <div class="letter-title">
+                <span class="letter-title-line">Maaf</span>
+            </div>
+        </div>
+
+        <!-- Surat Terbuka -->
+        <div class="letter-opened" id="letterOpened">
+            <div class="letter-header">
+                <h1>Surat Permintaan Maaf</h1>
+                <div class="letter-date">Hari ini</div>
+            </div>
+
+            <div class="letter-content">
+                <p>
+                    Sayangku Cintakuu manisku duniakuuu,
+                </p>
+                <p>
+                    Aku minta maaf yaaa sayangg  tadi pagi aku ketiduran dan lupa ngucapin selamat jalan sama hati-hati di jalan pas kamu mauuu berangkat sekolah.
+                </p>
+                <p>
+                    Aku janji akan lebih perhatian lagi ke depannya dan samaaa gakk akan ngulangi lagiii. akuu sayangg kamuuuu, i Lovee youu sayangg today tomorrow and always.
+                </p>
+                <p>
+                    Maafin aku yaa sayangg sama jangan ngambeekkk yaaaaaaaa pleaseeee. Aku sayang kamu! 💕
+                </p>
+            </div>
+
+            <div class="cats-in-letter">
+                <div class="cat-emoji">🐱</div>
+                <div class="cat-emoji">😸</div>
+                <div class="cat-emoji">😻</div>
+                <div class="cat-emoji">🐾</div>
+            </div>
+
+            <div class="letter-signature">
+                <div>Dengan penuh cinta,</div>
+                <div class="name">💖</div>
+            </div>
+
+            <div class="letter-photo">
+                <img src="imam.jpg" alt="Foto" />
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const letterClosed = document.getElementById('letterClosed');
+        const letterOpened = document.getElementById('letterOpened');
+        const stamp = document.getElementById('stamp');
+        let isOpened = false;
+
+        // Fungsi untuk membuka surat
+        function openLetter() {
+            if (isOpened) return;
+            isOpened = true;
+
+            // Animasi stempel hilang
+            stamp.style.opacity = '0';
+            stamp.style.transform = 'scale(0)';
+            
+            // Animasi surat terbuka
+            letterClosed.classList.add('opening');
+            
+            setTimeout(() => {
+                letterClosed.classList.add('opened');
+                letterOpened.classList.add('show');
+            }, 600);
+        }
+
+        // Event listener untuk stempel
+        stamp.addEventListener('click', openLetter);
+        letterClosed.addEventListener('click', (e) => {
+            if (e.target === stamp || e.target.closest('.stamp')) return;
+            openLetter();
+        });
+
+
+        // Tambahkan efek hover pada stempel
+        stamp.addEventListener('mouseenter', () => {
+            if (!isOpened) {
+                stamp.style.cursor = 'pointer';
+            }
+        });
+    </script>
+</body>
+</html>
